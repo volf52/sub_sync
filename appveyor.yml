@@ -22,7 +22,9 @@ artifacts:
   name: mainApp
 deploy:
 - provider: GitHub
-  repository: volf52/sub_sync
+  auth-token:
+    secure: Mz5OAmIXZKooT54MISasmNHuAYM68YP6wdsMLSyYe+SZDObYntpczP1cvixvGIfF
+  description: 'Testing release process'
   artifact: mainApp
   on:
     appveyor_repo_tag: true
