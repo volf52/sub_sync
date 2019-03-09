@@ -1,0 +1,17 @@
+language: python
+python: 3.7
+install:
+- pip install -r requirements.txt
+script:
+- pyinstaller --onefile sub_fix.py
+- sha1sum dist/take_a_break > dist/sub_fix.sha1
+deploy:
+  provider: releases
+  api_key:
+    secure: YleMMCTPQKzaj//116kfCgsLW8xg+ZewPKNpwK36AQgg7cM1ZoNtMVuMN8VHowlPFs5MbR4yExEzjkqDDI1JAvDtby1yQR1byFEx2mwn+8NP6G4bE3tKUNVPFbcNG2lRIvs2vgr34Epyrr+48DsGvjzu6VFvKOPFglRqne3dZCoTT5/X0GWVsKza4FkvBfYY4iD6hX8hrDn4TNJsVxsGacoaYaMKEDeehRHzLHyOmV2KJ5HRZAIb+MfYITxEFlT5Eq0+AyGib4DoEnqx7kz6mP8AlF+oCmfY58NgcFzMJc5gODzDb3gUfD8iKGhP4G2TakZHLkZZFsRpb9919amsmDKSTLQWkQsl6xPikObypCb+atXDZsZJRZvTi9HXHueAPT6K5rrGe8+OTtT6krIbqH1cr9Q6MmhgGyz3lcJRu5YVJ+T/9GRj4z3A80zRvdM5OzJnRvih1jMHr/uKNolA0n/ZeP1A6qg04Q0/2b2mOR7sHaaguwW579/m4kiGYzSqwOYT0kTk4Zl6bNdF384l5uzwzEItIoA5V/6Jsff1YsQzMT6tcaOt92ekVw18VtNkmmJRl3XDVKDus+FwLG0dQfjM0G1cQhWOPYOMA05TM/MObbgsPOTzkMCc6QvEqLvHlR8Dbf275FlrUID2fm4ThWQSgWC9bhlr5sxmor+2qmo=
+  file_glob: true
+  file: dist/*
+  skip_cleanup: true
+  on:
+    repo: volf52/sub_sync
+    tags: true

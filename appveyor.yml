@@ -1,0 +1,33 @@
+version: '1.0.{build}'
+clone_folder: c:\projects\subsync
+environment:
+    matrix:
+       - PYTHON: "C:\\Python37"
+         PYTHON_VERSION: "3.7"
+         PYTHON_ARCH: "64"
+install:
+    - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+    - C:/Python37/Scripts/pip.exe install wheel
+    - cd c:\projects\subsync
+    - C:/Python37/Scripts/pip.exe install -r %APPVEYOR_BUILD_FOLDER%\requirements.txt
+    - python --version
+test_script:
+    - cd c:\projects\takeBreak
+    -  "C:/Python37/Scripts/pyinstaller.exe --onefile sub_fix.py"
+
+artifacts:
+- path: dist\sub_fix.exe
+  name: mainApp
+deploy:
+- provider: GitHub
+  repository: volf52/sub_sync
+  artifact: mainApp
+  on:
+    appveyor_repo_tag: true
+notifications:
+  - provider: Email
+    to:
+      - rslnkrmt2552@gmail.com
+    subject: 'Build {{status}}'                  # optional
+    message: "{{message}}, {{commitId}}, ..."    # optional
+    on_build_status_changed: true
