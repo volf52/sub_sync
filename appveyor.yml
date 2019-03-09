@@ -11,6 +11,8 @@ install:
     - cd c:\projects\subsync
     - C:/Python36/Scripts/pip.exe install -r %APPVEYOR_BUILD_FOLDER%\requirements.txt
     - python --version
+
+build: off
 test_script:
     - cd c:\projects\takeBreak
     -  "C:/Python36/Scripts/pyinstaller.exe --onefile sub_fix.py"
